@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: History</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="padding: 12px 12px 10px; display: flex; align-items: center; gap: 4px">
+    <a href="Train.dc.html" aria-label="Back to Train" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #16202C; border-radius: 24px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </a>
+    <h1 style="margin: 0; flex: 1; font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700">History</h1>
+  </header>
+
+  <main style="flex: 1; padding: 0 20px; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <button aria-label="Previous month" style="width: 40px; height: 40px; border-radius: 20px; border: 0; background: transparent; color: #16202C; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700">October 2026</h2>
+        <button aria-label="Next month" style="width: 40px; height: 40px; border-radius: 20px; border: 0; background: transparent; color: #16202C; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #5F6B7E">
+        <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+        <sc-for list="{{cells}}" as="c" hint-placeholder-count="35">
+          <button onClick="{{c.pick}}" disabled="{{c.blank}}" aria-label="{{c.label}}" style="{{c.style}}">
+            <span>{{c.num}}</span>
+            <span style="display: flex; gap: 2px; height: 5px"><span style="{{c.t}}"></span><span style="{{c.f}}"></span></span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 14px; font-size: 12px; color: #4A5667">
+        <span style="display: flex; align-items: center; gap: 5px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #1D7A4A"></span>Training</span>
+        <span style="display: flex; align-items: center; gap: 5px"><span style="width: 7px; height: 7px; border-radius: 50%; background: {{accent}}"></span>Food</span>
+      </div>
+    </section>
+
+    <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E; padding: 0 2px">Tue 6 Oct</span>
+    <a href="WorkoutDone.dc.html" style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 16px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: #16202C">
+      <span style="width: 40px; height: 40px; border-radius: 12px; background: #E2F3EA; color: #1D7A4A; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path></svg></span>
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px">Lower + Walk</span><span style="font-size: 13px; color: #4A5667">12 sets · squat 40 kg × 8, 7, 7</span></span>
+      <span style="color: #5F6B7E" aria-hidden="true">›</span>
+    </a>
+    <a href="Food.dc.html" style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 16px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: #16202C">
+      <span style="width: 40px; height: 40px; border-radius: 12px; background: {{accentSoft}}; color: {{accent}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M7 7h4M17 3c-1.7 0-3 2.2-3 5s1.3 4 3 4v9"></path></svg></span>
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px">Food: 1,645 kcal · 125 g protein</span><span style="font-size: 13px; color: #4A5667">6 items across 3 meals</span></span>
+      <span style="color: #5F6B7E" aria-hidden="true">›</span>
+    </a>
+  </main>
+
+  <nav aria-label="Main" style="height: 80px; background: #FFFFFF; border-top: 1px solid #D6DCE5; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center">
+    <a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Today</a>
+    <a href="Train.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #16202C; font-size: 12px; font-weight: 600">
+      <span style="width: 64px; height: 32px; border-radius: 16px; background: {{accentSoft}}; color: {{accent}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path></svg></span>Train</a>
+    <a href="Food.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M7 7h4M17 3c-1.7 0-3 2.2-3 5s1.3 4 3 4v9"></path></svg></span>Food</a>
+    <a href="Progress.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></span>Progress</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"accentSoft":{"editor":"color","default":"#E3EBFA"},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: 6 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#2350A8';
+    const trained = { 6: true }, fed = { 6: true, 7: true };
+    const dot = (on, c) => 'width: 5px; height: 5px; border-radius: 50%; background: ' + (on ? c : 'transparent');
+    const cells = [];
+    for (let i = 0; i < 3; i++) cells.push({ blank: true, num: '', label: 'Empty', style: 'height: 44px; border: 0; background: transparent', t: dot(false), f: dot(false), pick: () => {} });
+    for (let d = 1; d <= 31; d++) {
+      const sel = this.state.sel === d, today = d === 7;
+      cells.push({
+        blank: false, num: d, label: d + ' October',
+        style: 'height: 44px; border-radius: 10px; font: inherit; font-size: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; cursor: pointer; ' +
+          (sel ? 'border: 0; background: ' + accent + '; color: #FFFFFF; font-weight: 600' : 'border: ' + (today ? '1.5px solid ' + accent : '0') + '; background: transparent; color: ' + (d > 7 ? '#8A95A6' : '#16202C')),
+        t: dot(trained[d], sel ? '#FFFFFF' : '#1D7A4A'), f: dot(fed[d], sel ? '#C9D8F5' : accent),
+        pick: () => this.setState({ sel: d })
+      });
+    }
+    return { accent, accentSoft: this.props.accentSoft ?? '#E3EBFA', cells };
+  }
+}
+</script>
+</body>
+</html>

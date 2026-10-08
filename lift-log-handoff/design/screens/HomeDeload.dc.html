@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Home deload</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="padding: 12px 12px 10px; display: flex; align-items: center; gap: 4px">
+    <a href="Train.dc.html" aria-label="Back to Train" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #16202C; border-radius: 24px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </a>
+    <div style="flex: 1; display: flex; flex-direction: column">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Mon 26 Oct · Week 4 · Exam week</span>
+      <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.05">Home deload</h1>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 6px 20px 0; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <section style="background: #16202C; color: #FFFFFF; border-radius: 20px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px">
+      <span style="font-size: 14px; color: #C9D2DE; line-height: 1.5">No equipment, about 25 minutes at an easy 7 out of 10. Keep the habit and the joints moving. Don't chase numbers this week.</span>
+    </section>
+
+    <section style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 14px 16px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Round</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 700; line-height: 1">{{round}} <span style="font-size: 18px; color: #5F6B7E">of 3</span></span>
+      </div>
+      <div style="display: flex; gap: 6px">
+        <sc-for list="{{rounds}}" as="r" hint-placeholder-count="3">
+          <button onClick="{{r.pick}}" aria-label="Round {{r.n}}" aria-pressed="{{r.on}}" style="{{r.style}}">{{r.n}}</button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 6px 16px; display: flex; flex-direction: column">
+      <sc-for list="{{moves}}" as="m" hint-placeholder-count="6">
+        <label style="display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid #E6EAF0; min-height: 48px; box-sizing: border-box">
+          <input type="checkbox" defaultChecked="{{m.done}}" style="width: 22px; height: 22px; accent-color: #1D7A4A">
+          <span style="display: flex; flex-direction: column; gap: 1px"><span style="font-weight: 500; font-size: 15px">{{m.name}}</span><span style="font-size: 12px; color: #4A5667">{{m.tip}}</span></span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5667">{{m.rx}}</span>
+        </label>
+      </sc-for>
+    </section>
+  </main>
+
+  <div style="padding: 12px 20px 20px">
+    <button style="width: 100%; height: 52px; border-radius: 16px; border: 0; background: {{accent}}; color: #FFFFFF; font: inherit; font-weight: 600; font-size: 16px">Finish deload session</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { round: 2 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#2350A8';
+    const rounds = [1, 2, 3].map(n => ({
+      n, on: this.state.round === n,
+      style: 'width: 44px; height: 44px; border-radius: 22px; font: inherit; font-weight: 600; cursor: pointer; ' + (n < this.state.round ? 'border: 0; background: #1D7A4A; color: #FFFFFF' : n === this.state.round ? 'border: 2px solid ' + accent + '; background: #FFFFFF; color: ' + accent : 'border: 1px solid #D6DCE5; background: #FFFFFF; color: #4A5667'),
+      pick: () => this.setState({ round: n })
+    }));
+    const moves = [
+      { name: 'Push-ups', tip: 'Knees down is fine', rx: '10–15', done: true },
+      { name: 'Pike push-ups', tip: 'Hips high, head between hands', rx: '8–10', done: true },
+      { name: 'Chair Bulgarian split squat', tip: 'Back foot on the chair', rx: '8 / leg', done: false },
+      { name: 'Glute bridge', tip: 'Squeeze at the top', rx: '15', done: false },
+      { name: 'Plank', tip: 'Straight line, slow breaths', rx: '45 s', done: false },
+      { name: 'Water bottle wrist curl', tip: 'Full bottles, slow', rx: '20', done: false }
+    ];
+    return { accent, round: this.state.round, rounds, moves };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-06",
+  "items": [
+    {
+      "id": "muwvrnngznij",
+      "k": 250,
+      "meal": "Lunch",
+      "n": "Beef stew",
+      "p": 25,
+      "portion": "fist-size meat (~100 g)",
+      "qty": 1,
+      "src": "list"
+    },
+    {
+      "id": "muwvtuyasq3c",
+      "k": 250,
+      "meal": "Breakfast",
+      "n": "Mandazi",
+      "p": 4,
+      "portion": "1",
+      "qty": 1.5,
+      "src": "list"
+    },
+    {
+      "id": "muwvzxs9skp7",
+      "k": 410,
+      "meal": "Dinner",
+      "n": "Grilled chicken breast (skinless)",
+      "p": 77,
+      "portion": "250 g",
+      "qty": 1,
+      "src": "suggestion"
+    },
+    {
+      "id": "muwvzxs9smw0",
+      "k": 440,
+      "meal": "Dinner",
+      "n": "Ugali",
+      "p": 8,
+      "portion": "2 cups (~300 g)",
+      "qty": 1,
+      "src": "suggestion"
+    },
+    {
+      "id": "muwvzxs9rxgp",
+      "k": 100,
+      "meal": "Dinner",
+      "n": "Sukuma wiki",
+      "p": 3,
+      "portion": "1 cup cooked",
+      "qty": 1,
+      "src": "suggestion"
+    },
+    {
+      "id": "muwvzxs9sgnc",
+      "k": 70,
+      "meal": "Dinner",
+      "n": "Boiled egg",
+      "p": 6,
+      "portion": "1 egg",
+      "qty": 1,
+      "src": "suggestion"
+    }
+  ],
+  "savedAt": "2026-10-06T16:22:25.766Z"
+}

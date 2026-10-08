@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Sunday check-in</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="padding: 12px 12px 10px; display: flex; align-items: center; gap: 4px">
+    <a href="Progress.dc.html" aria-label="Back to Progress" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #16202C; border-radius: 24px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </a>
+    <div style="flex: 1; display: flex; flex-direction: column">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Sun 11 Oct · Week 1</span>
+      <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.05">Sunday check-in</h1>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 6px 20px 0; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 10px; align-items: center">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Body weight</span>
+      <div style="display: flex; align-items: center; gap: 16px">
+        <button onClick="{{down}}" aria-label="Decrease by 0.1 kg" style="width: 52px; height: 52px; border-radius: 26px; border: 1px solid #B9C2CF; background: #FFFFFF; font: inherit; font-size: 24px; color: #16202C">−</button>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 60px; font-weight: 700; line-height: 1; min-width: 150px; text-align: center">{{weight}}<span style="font-size: 22px; color: #5F6B7E"> kg</span></span>
+        <button onClick="{{up}}" aria-label="Increase by 0.1 kg" style="width: 52px; height: 52px; border-radius: 26px; border: 1px solid #B9C2CF; background: #FFFFFF; font: inherit; font-size: 24px; color: #16202C">+</button>
+      </div>
+      <span style="font-size: 13px; color: #4A5667">Weigh in the morning, before eating, same scale each week.</span>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700">Measurements</h2>
+        <span style="font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 8px; background: #FBF0D9; color: #8A5A00">Due this week</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4A5667">Waist (cm)
+          <input inputmode="decimal" placeholder="at the navel" style="height: 48px; border-radius: 12px; border: 1px solid #D6DCE5; background: #F5F7FA; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #16202C; box-sizing: border-box; width: 100%">
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4A5667">Forearm (cm)
+          <input inputmode="decimal" placeholder="widest point" style="height: 48px; border-radius: 12px; border: 1px solid #D6DCE5; background: #F5F7FA; padding: 0 12px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #16202C; box-sizing: border-box; width: 100%">
+        </label>
+      </div>
+      <span style="font-size: 12px; color: #5F6B7E">Every 2 weeks. Same arm each time.</span>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700">How was the week?</h2>
+      <sc-for list="{{scales}}" as="q" hint-placeholder-count="2">
+        <div role="group" aria-label="{{q.label}}" style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 14px; color: #4A5667">{{q.label}}</span>
+          <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px">
+            <sc-for list="{{q.opts}}" as="o" hint-placeholder-count="5">
+              <button onClick="{{o.pick}}" aria-pressed="{{o.on}}" aria-label="{{o.aria}}" style="{{o.style}}">{{o.n}}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+      <span style="font-size: 12px; color: #5F6B7E">1 = poor, 5 = great. Used in your weekly review.</span>
+    </section>
+
+    <section style="display: flex; align-items: center; gap: 12px; padding: 4px 2px">
+      <span style="width: 40px; height: 40px; border-radius: 12px; background: #E6EAF0; color: #5F6B7E; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg></span>
+      <span style="font-size: 13px; color: #4A5667">Progress photo next due Sun 1 Nov.</span>
+    </section>
+  </main>
+
+  <div style="padding: 12px 20px 20px">
+    <a href="WeeklyReview.dc.html" style="height: 52px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-size: 16px">Save and see weekly review</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { w: 72.0, sleep: 3, energy: 4 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#2350A8';
+    const scale = (key, label) => ({
+      label,
+      opts: [1, 2, 3, 4, 5].map(n => {
+        const on = this.state[key] === n;
+        return { n, on, aria: label + ' ' + n + ' of 5',
+          style: 'height: 44px; border-radius: 12px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ' + (on ? 'border: 0; background: ' + accent + '; color: #FFFFFF' : 'border: 1px solid #D6DCE5; background: #FFFFFF; color: #16202C'),
+          pick: () => this.setState({ [key]: n }) };
+      })
+    });
+    return {
+      accent,
+      weight: this.state.w.toFixed(1),
+      down: () => this.setState({ w: Math.round((this.state.w - 0.1) * 10) / 10 }),
+      up: () => this.setState({ w: Math.round((this.state.w + 0.1) * 10) / 10 }),
+      scales: [scale('sleep', 'Sleep'), scale('energy', 'Energy in the gym')]
+    };
+  }
+}
+</script>
+</body>
+</html>

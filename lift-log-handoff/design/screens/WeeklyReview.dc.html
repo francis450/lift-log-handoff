@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Weekly review</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="padding: 12px 12px 8px; display: flex; align-items: center; gap: 4px">
+    <a href="Progress.dc.html" aria-label="Back to Progress" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #16202C; border-radius: 24px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </a>
+    <div style="flex: 1; display: flex; flex-direction: column">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Week 1 · 5–11 Oct · by Claude</span>
+      <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.05">Weekly review</h1>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 4px 20px 0; display: flex; flex-direction: column; gap: 10px; overflow: hidden">
+    <section style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
+        <div style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 14px; padding: 10px; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 700; line-height: 1">{{s.v}}</span>
+          <span style="font-size: 11px; color: #4A5667; line-height: 1.3">{{s.k}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: #1D7A4A">Went well</h2>
+      <p style="margin: 0; font-size: 14px; line-height: 1.5">Four of five sessions done, and every main lift held its reps. Forearm finishers were logged all three days.</p>
+      <h2 style="margin: 4px 0 0; font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: #8A5A00">To change</h2>
+      <p style="margin: 0; font-size: 14px; line-height: 1.5">Protein averaged 98 g, short of 130 g on five days. 7 of 12 squat and RDL sets felt easy, so those weights are too light. Monday was missed.</p>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 8px 16px; display: flex; flex-direction: column">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E; padding: 8px 0 2px">Proposed for next week</span>
+      <sc-for list="{{changes}}" as="c" hint-placeholder-count="3">
+        <label style="display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid #E6EAF0; cursor: pointer">
+          <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px">{{c.title}}</span><span style="font-size: 12px; color: #4A5667">{{c.why}}</span></span>
+          <span style="{{c.track}}"><span style="{{c.knob}}"></span><input type="checkbox" checked="{{c.on}}" onChange="{{c.toggle}}" style="position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer" aria-label="{{c.title}}"></span>
+        </label>
+      </sc-for>
+    </section>
+
+    <label style="display: flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 16px; padding: 4px 4px 4px 14px">
+      <span style="position: absolute; left: -9999px">Ask Claude about this week</span>
+      <input placeholder="Ask about this week…" style="flex: 1; border: 0; background: transparent; font: inherit; font-size: 15px; color: #16202C; height: 44px; min-width: 0">
+      <button aria-label="Send" style="width: 44px; height: 44px; border-radius: 12px; border: 0; background: #EEF1F5; color: {{accent}}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+    </label>
+  </main>
+
+  <div style="padding: 12px 20px 20px">
+    <a href="Train.dc.html" style="height: 52px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-size: 16px">Apply {{count}} changes to week 2</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { on: [true, true, true] }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#2350A8';
+    const items = [
+      { title: 'Squat and RDL: +2.5 kg', why: 'Two sessions of mostly easy sets' },
+      { title: 'Whey after training', why: '+24 g protein on 5 days a week' },
+      { title: 'Move a missed Monday to Saturday', why: 'Keeps 5 sessions when Monday slips' }
+    ];
+    const changes = items.map((c, i) => {
+      const on = this.state.on[i];
+      return { ...c, on,
+        track: 'position: relative; display: block; width: 52px; height: 32px; border-radius: 16px; background: ' + (on ? accent : '#C9D0DA'),
+        knob: 'position: absolute; top: 4px; left: ' + (on ? 24 : 4) + 'px; width: 24px; height: 24px; border-radius: 12px; background: #FFFFFF',
+        toggle: () => { const a = this.state.on.slice(); a[i] = !a[i]; this.setState({ on: a }); } };
+    });
+    const stats = [
+      { v: '4 / 5', k: 'sessions' },
+      { v: '98 g', k: 'avg protein' },
+      { v: '1,890', k: 'avg kcal' },
+      { v: '72.0', k: 'kg, first weigh-in' }
+    ];
+    return { accent, changes, stats, count: this.state.on.filter(Boolean).length };
+  }
+}
+</script>
+</body>
+</html>

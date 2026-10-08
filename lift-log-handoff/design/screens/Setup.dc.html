@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Profile and targets</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="padding: 24px 20px 12px; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+      <span style="height: 4px; border-radius: 2px; background: {{accent}}"></span>
+      <span style="height: 4px; border-radius: 2px; background: {{accent}}"></span>
+    </div>
+    <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Step 2 of 2</span>
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 700; line-height: 1">About you and your plan</h1>
+  </header>
+
+  <main style="flex: 1; padding: 0 20px; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+      <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4A5667">Weight (kg)
+        <input value="72" inputmode="decimal" style="height: 48px; border-radius: 12px; border: 1px solid #D6DCE5; background: #F5F7FA; padding: 0 10px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #16202C; box-sizing: border-box; width: 100%">
+      </label>
+      <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4A5667">Height (cm)
+        <input inputmode="numeric" placeholder="cm" style="height: 48px; border-radius: 12px; border: 1px solid #D6DCE5; background: #F5F7FA; padding: 0 10px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #16202C; box-sizing: border-box; width: 100%">
+      </label>
+      <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4A5667">Age
+        <input inputmode="numeric" placeholder="years" style="height: 48px; border-radius: 12px; border: 1px solid #D6DCE5; background: #F5F7FA; padding: 0 10px; font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #16202C; box-sizing: border-box; width: 100%">
+      </label>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 14px; font-weight: 600">Goal</span>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <sc-for list="{{goals}}" as="g" hint-placeholder-count="3">
+          <button onClick="{{g.pick}}" aria-pressed="{{g.on}}" style="{{g.style}}">{{g.label}}</button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 14px; font-weight: 600">Training days</span>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+          <button onClick="{{d.pick}}" aria-pressed="{{d.on}}" aria-label="{{d.full}}" style="{{d.style}}">{{d.label}}</button>
+        </sc-for>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; min-height: 44px">
+        <span style="font-size: 14px; color: #4A5667">Session time</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">6:00 PM ›</span>
+      </div>
+    </section>
+
+    <section style="background: {{accentSoft}}; border-radius: 20px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: {{accent}}">Your starting targets</span>
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700">2,200 kcal · 130 g protein</span>
+      <span style="font-size: 13px; color: #4A5667; line-height: 1.45">Calories update once you add height and age. Change both any time in Settings.</span>
+    </section>
+  </main>
+
+  <div style="padding: 12px 20px 20px">
+    <a href="Main.dc.html" style="height: 52px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-size: 16px">Start Block 2</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"accentSoft":{"editor":"color","default":"#E3EBFA"},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { goal: 'Lose fat, get stronger', days: [true, true, true, true, true, false, false] }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#2350A8';
+    const chip = on => 'min-height: 44px; padding: 0 14px; border-radius: 22px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; ' + (on ? 'border: 0; background: ' + accent + '; color: #FFFFFF' : 'border: 1px solid #B9C2CF; background: #FFFFFF; color: #16202C');
+    const goals = ['Lose fat, get stronger', 'Build muscle', 'Maintain'].map(label => ({ label, on: this.state.goal === label, style: chip(this.state.goal === label), pick: () => this.setState({ goal: label }) }));
+    const names = [['M', 'Monday'], ['T', 'Tuesday'], ['W', 'Wednesday'], ['T', 'Thursday'], ['F', 'Friday'], ['S', 'Saturday'], ['S', 'Sunday']];
+    const days = names.map(([label, full], i) => {
+      const on = this.state.days[i];
+      return { label, full, on,
+        style: 'height: 44px; border-radius: 12px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ' + (on ? 'border: 0; background: ' + accent + '; color: #FFFFFF' : 'border: 1px solid #D6DCE5; background: #FFFFFF; color: #4A5667'),
+        pick: () => { const d = this.state.days.slice(); d[i] = !d[i]; this.setState({ days: d }); } };
+    });
+    return { accent, accentSoft: this.props.accentSoft ?? '#E3EBFA', goals, days };
+  }
+}
+</script>
+</body>
+</html>

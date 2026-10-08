@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Add food from a photo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #5A6472; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden">
+
+  <a href="Food.dc.html" aria-label="Close and go back to Food" style="flex: 1; display: block"></a>
+
+  <section role="dialog" aria-label="Add food to Lunch" style="background: #FFFFFF; border-radius: 28px 28px 0 0; padding: 10px 20px 20px; display: flex; flex-direction: column; gap: 14px">
+    <span style="align-self: center; width: 36px; height: 4px; border-radius: 2px; background: #B9C2CF"></span>
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700">Add food</h1>
+      <a href="Food.dc.html" aria-label="Close" style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #16202C"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    </div>
+
+    <div role="tablist" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; background: #EEF1F5; border-radius: 14px; padding: 4px">
+      <sc-for list="{{modes}}" as="m" hint-placeholder-count="4">
+        <button role="tab" aria-selected="{{m.on}}" onClick="{{m.pick}}" style="{{m.style}}">{{m.label}}</button>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; gap: 12px; align-items: center">
+      <div style="width: 96px; height: 96px; border-radius: 16px; background: #E6EAF0; border: 1px dashed #B9C2CF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #5F6B7E; font-size: 11px; text-align: center; flex-shrink: 0">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
+        [Meal photo]
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+        <span style="font-weight: 600; font-size: 15px">Found 3 foods</span>
+        <span style="font-size: 13px; color: #4A5667; line-height: 1.45">Estimated from the photo. Check portions, especially oil in the stew.</span>
+        <button style="align-self: flex-start; height: 36px; padding: 0; border: 0; background: transparent; color: {{accent}}; font: inherit; font-size: 13px; font-weight: 600">Retake photo</button>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; border: 1px solid #D6DCE5; border-radius: 16px; overflow: hidden">
+      <div style="display: grid; grid-template-columns: 32px minmax(0, 1fr) 64px 56px; gap: 8px; padding: 8px 12px; background: #F5F7FA; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">
+        <span></span><span>Food</span><span style="text-align: right">kcal</span><span style="text-align: right">Prot.</span>
+      </div>
+      <sc-for list="{{found}}" as="f" hint-placeholder-count="3">
+        <label style="display: grid; grid-template-columns: 32px minmax(0, 1fr) 64px 56px; gap: 8px; padding: 10px 12px; align-items: center; border-top: 1px solid #E6EAF0; min-height: 44px; box-sizing: border-box">
+          <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: {{accent}}">
+          <span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 14px; font-weight: 500">{{f.n}}</span><span style="font-size: 12px; color: #5F6B7E">{{f.q}}</span></span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; text-align: right">{{f.k}}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; text-align: right; color: #1D7A4A">{{f.p}}</span>
+        </label>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Add to</span>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <sc-for list="{{meals}}" as="ml" hint-placeholder-count="4">
+          <button onClick="{{ml.pick}}" aria-pressed="{{ml.on}}" style="{{ml.style}}">{{ml.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <a href="Food.dc.html" style="height: 52px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-size: 16px">Add 3 foods · 610 kcal · 34 g</a>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { mode: 'Photo', meal: 'Lunch' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#2350A8';
+    const tab = on => 'height: 40px; border-radius: 10px; border: 0; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; ' + (on ? 'background: #FFFFFF; color: #16202C; box-shadow: 0 1px 3px rgba(22,32,44,0.15)' : 'background: transparent; color: #4A5667');
+    const chip = on => 'height: 40px; padding: 0 16px; border-radius: 20px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; ' + (on ? 'border: 0; background: ' + accent + '; color: #FFFFFF' : 'border: 1px solid #B9C2CF; background: #FFFFFF; color: #16202C');
+    const modes = ['Photo', 'Describe', 'Search', 'Custom'].map(label => ({ label, on: this.state.mode === label, style: tab(this.state.mode === label), pick: () => this.setState({ mode: label }) }));
+    const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snack'].map(label => ({ label, on: this.state.meal === label, style: chip(this.state.meal === label), pick: () => this.setState({ meal: label }) }));
+    const found = [
+      { n: 'Chicken stew', q: 'fist-size, ~100 g', k: '220', p: '25 g' },
+      { n: 'Rice, cooked', q: '1.5 cups', k: '310', p: '6 g' },
+      { n: 'Sukuma wiki', q: '1 cup', k: '80', p: '3 g' }
+    ];
+    return { accent, modes, meals, found };
+  }
+}
+</script>
+</body>
+</html>

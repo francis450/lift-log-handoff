@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-06",
+  "note": "I am tired than the usual Tuesdays, I think I have been lifting blindly and below my capabilities",
+  "routine": "Lower + Walk",
+  "savedAt": "2026-10-06T16:14:39.133Z",
+  "sets": {
+    "Barbell Romanian deadlift": [
+      {
+        "amt": 10,
+        "kg": 30
+      },
+      {
+        "amt": 10,
+        "kg": 40
+      },
+      {
+        "amt": 10,
+        "kg": 40
+      }
+    ],
+    "Barbell back squat": [
+      {
+        "amt": 8,
+        "kg": 40
+      },
+      {
+        "amt": 7,
+        "kg": 40
+      },
+      {
+        "amt": 7,
+        "kg": 40
+      }
+    ],
+    "Hip thrust": [
+      {
+        "amt": 10,
+        "kg": 50
+      },
+      {
+        "amt": 8,
+        "kg": 50
+      },
+      {
+        "amt": 8,
+        "kg": 50
+      }
+    ],
+    "Standing calf raise": [
+      {
+        "amt": 10,
+        "kg": 40
+      },
+      {
+        "amt": 10,
+        "kg": 40
+      },
+      {
+        "amt": 10,
+        "kg": 40
+      }
+    ]
+  },
+  "week": 1
+}

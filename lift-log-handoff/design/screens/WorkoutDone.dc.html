@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Workout summary</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="padding: 28px 20px 14px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start">
+    <span style="width: 48px; height: 48px; border-radius: 24px; background: #1D7A4A; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
+    </span>
+    <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Tue 6 Oct · saved</span>
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 700; line-height: 1">Lower + Walk done</h1>
+  </header>
+
+  <main style="flex: 1; padding: 0 20px; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <section style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+      <div style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 2px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; line-height: 1">52<span style="font-size: 15px; color: #5F6B7E"> min</span></span>
+        <span style="font-size: 12px; color: #4A5667">duration</span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 2px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; line-height: 1">12</span>
+        <span style="font-size: 12px; color: #4A5667">sets logged</span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 2px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; line-height: 1">4,480<span style="font-size: 15px; color: #5F6B7E"> kg</span></span>
+        <span style="font-size: 12px; color: #4A5667">total lifted</span>
+      </div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700">How hard it felt</h2>
+        <span style="font-size: 12px; color: #5F6B7E">12 sets</span>
+      </div>
+      <div style="display: flex; height: 14px; border-radius: 7px; overflow: hidden; gap: 2px">
+        <span style="flex: 7; background: #1D7A4A"></span>
+        <span style="flex: 4; background: {{accent}}"></span>
+        <span style="flex: 1; background: #B07A12"></span>
+      </div>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: #4A5667">
+        <span><b style="color: #1D7A4A">7</b> easy</span><span><b style="color: {{accent}}">4</b> right</span><span><b style="color: #8A5A00">1</b> hard</span>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #16202C; background: #E2F3EA; border-radius: 10px; padding: 8px 10px; line-height: 1.45">Most sets felt easy. That matches your note: there's room to go heavier next week.</p>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 8px 16px; display: flex; flex-direction: column">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E; padding: 8px 0 4px">Next time</span>
+      <sc-for list="{{next}}" as="x" hint-placeholder-count="4">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid #E6EAF0">
+          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+            <span style="font-weight: 500; font-size: 15px">{{x.name}}</span>
+            <span style="font-size: 12px; color: #4A5667">{{x.why}}</span>
+          </span>
+          <span style="{{x.chip}}">{{x.call}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Your note</span>
+      <span style="font-size: 14px; line-height: 1.45">I am tired than the usual Tuesdays, I think I have been lifting blindly and below my capabilities</span>
+    </section>
+  </main>
+
+  <div style="padding: 12px 20px 20px">
+    <a href="Main.dc.html" style="height: 52px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-size: 16px">Done</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const chip = (bg, fg) => 'font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 8px; white-space: nowrap; background: ' + bg + '; color: ' + fg;
+    const up = chip('#E2F3EA', '#1D7A4A'), hold = chip('#FBF0D9', '#8A5A00');
+    const next = [
+      { name: 'Back squat', why: '8, 7, 7 and easy: one more easy session moves you up', call: 'Stay 40 kg', chip: hold },
+      { name: 'Romanian deadlift', why: 'Beat 8 reps on every set', call: '42.5 kg', chip: up },
+      { name: 'Hip thrust', why: '10, 8, 8 reps: reach 10 on all sets', call: 'Stay 50 kg', chip: hold },
+      { name: 'Standing calf raise', why: '10 of 15 reps: build reps first', call: 'Stay 40 kg', chip: hold }
+    ];
+    return { accent: this.props.accent ?? '#2350A8', next };
+  }
+}
+</script>
+</body>
+</html>

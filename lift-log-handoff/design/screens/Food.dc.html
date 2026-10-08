@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Food day</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; position: relative; overflow: hidden">
+
+  <header style="padding: 20px 20px 12px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Wed 7 Oct</span>
+      <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 700; line-height: 1">Food</h1>
+    </div>
+    <div style="display: flex; gap: 4px">
+      <button aria-label="Previous day" style="width: 44px; height: 44px; border-radius: 22px; border: 1px solid #D6DCE5; background: #FFFFFF; color: #16202C; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+      <button aria-label="Next day" style="width: 44px; height: 44px; border-radius: 22px; border: 1px solid #D6DCE5; background: #FFFFFF; color: #16202C; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></button>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 0 20px 96px; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 18px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Calories</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 700; line-height: 1">720</span>
+        <span style="display: block; height: 8px; border-radius: 4px; background: #E6EAF0; overflow: hidden"><span style="display: block; width: 33%; height: 100%; background: {{accent}}"></span></span>
+        <span style="font-size: 13px; color: #4A5667">1,480 of 2,200 left</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Protein</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 700; line-height: 1">19 g</span>
+        <span style="display: block; height: 8px; border-radius: 4px; background: #E6EAF0; overflow: hidden"><span style="display: block; width: 15%; height: 100%; background: #1D7A4A"></span></span>
+        <span style="font-size: 13px; color: #4A5667">111 of 130 g left</span>
+      </div>
+    </section>
+
+    <section style="background: {{accentSoft}}; border-radius: 20px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+        <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: {{accent}}">Suggested lunch</span>
+        <button style="height: 32px; padding: 0 10px; border-radius: 10px; border: 0; background: transparent; color: {{accent}}; font: inherit; font-size: 13px; font-weight: 600">Other ideas</button>
+      </div>
+      <span style="font-weight: 600; font-size: 16px">Chicken stew, rice and ndengu</span>
+      <span style="font-size: 13px; color: #4A5667">640 kcal · 46 g protein. Closes a third of your protein gap before training.</span>
+      <button style="align-self: flex-start; height: 40px; padding: 0 16px; border-radius: 12px; border: 0; background: {{accent}}; color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600">Add to lunch</button>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 6px 0; display: flex; flex-direction: column">
+      <sc-for list="{{meals}}" as="m" hint-placeholder-count="4">
+        <div style="padding: 10px 16px; display: flex; flex-direction: column; gap: 4px; border-bottom: 1px solid #E6EAF0">
+          <div style="display: flex; justify-content: space-between; align-items: center; min-height: 36px">
+            <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 600">{{m.name}}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6B7E">{{m.sum}}</span>
+          </div>
+          <sc-for list="{{m.items}}" as="it" hint-placeholder-count="2">
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: center; font-size: 14px; min-height: 32px">
+              <span>{{it.n}} <span style="color: #5F6B7E">{{it.q}}</span></span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5F6B7E">{{it.k}}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #1D7A4A">{{it.p}}</span>
+            </div>
+          </sc-for>
+          <sc-if value="{{m.empty}}" hint-placeholder-val="{{false}}">
+            <span style="font-size: 13px; color: #5F6B7E">Nothing yet</span>
+          </sc-if>
+        </div>
+      </sc-for>
+    </section>
+  </main>
+
+  <div role="status" style="position: absolute; left: 16px; right: 16px; bottom: 92px; min-height: 48px; border-radius: 12px; background: #16202C; color: #FFFFFF; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 8px 0 16px; font-size: 14px; box-shadow: 0 6px 16px rgba(22, 32, 44, 0.22)">
+    <span>Added Beef samosa to Breakfast</span>
+    <button style="height: 40px; padding: 0 12px; border: 0; border-radius: 10px; background: transparent; color: #9DBBF2; font: inherit; font-size: 14px; font-weight: 600">Undo</button>
+  </div>
+
+  <a href="AddFood.dc.html" style="position: absolute; right: 20px; bottom: 156px; height: 56px; padding: 0 20px 0 16px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 15px; box-shadow: 0 6px 16px rgba(22, 32, 44, 0.22)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
+    Add food
+  </a>
+
+  <nav aria-label="Main" style="height: 80px; background: #FFFFFF; border-top: 1px solid #D6DCE5; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center">
+    <a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Today</a>
+    <a href="Train.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path></svg></span>Train</a>
+    <a href="Food.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #16202C; font-size: 12px; font-weight: 600">
+      <span style="width: 64px; height: 32px; border-radius: 16px; background: {{accentSoft}}; color: {{accent}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M7 7h4M17 3c-1.7 0-3 2.2-3 5s1.3 4 3 4v9"></path></svg></span>Food</a>
+    <a href="Progress.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></span>Progress</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"accentSoft":{"editor":"color","default":"#E3EBFA"},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const meals = [
+      { name: 'Breakfast', sum: '720 kcal · 19 g', empty: false, items: [
+        { n: 'Mandazi', q: '× 2', k: '500', p: '8 g' },
+        { n: 'Boiled egg', q: '× 1', k: '70', p: '6 g' },
+        { n: 'Beef samosa', q: '× 1', k: '150', p: '5 g' }
+      ] },
+      { name: 'Lunch', sum: '', empty: true, items: [] },
+      { name: 'Dinner', sum: '', empty: true, items: [] },
+      { name: 'Snacks', sum: '', empty: true, items: [] }
+    ];
+    return { accent: this.props.accent ?? '#2350A8', accentSoft: this.props.accentSoft ?? '#E3EBFA', meals };
+  }
+}
+</script>
+</body>
+</html>

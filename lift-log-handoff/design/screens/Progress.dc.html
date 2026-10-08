@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Progress</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="padding: 20px 20px 12px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Block 2 · Week 1 of 12</span>
+      <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 700; line-height: 1">Progress</h1>
+    </div>
+    <a href="WeeklyReview.dc.html" style="height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid #D6DCE5; background: #FFFFFF; color: #16202C; display: flex; align-items: center; text-decoration: none; font-size: 14px; font-weight: 600">Weekly review</a>
+  </header>
+
+  <main style="flex: 1; padding: 0 20px; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+      <div style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 700; line-height: 1">1 <span style="font-size: 18px; color: #5F6B7E">/ 2</span></span>
+        <span style="font-size: 13px; color: #4A5667">sessions logged so far</span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 700; line-height: 1">0 <span style="font-size: 18px; color: #5F6B7E">/ 2</span></span>
+        <span style="font-size: 13px; color: #4A5667">days protein target hit</span>
+      </div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700">Protein this week</h2>
+        <span style="font-size: 12px; color: #5F6B7E">target 130 g</span>
+      </div>
+      <div style="position: relative; height: 120px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; align-items: end; padding-top: 8px">
+        <span style="position: absolute; left: 0; right: 0; bottom: 104px; border-top: 1.5px dashed #8A95A6"></span>
+        <sc-for list="{{bars}}" as="b" hint-placeholder-count="7">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4A5667">{{b.v}}</span>
+            <span style="{{b.bar}}"></span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #5F6B7E">
+        <span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
+      </div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 8px 16px; display: flex; flex-direction: column">
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 64px 84px; gap: 8px; padding: 8px 0; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E; border-bottom: 1px solid #E6EAF0">
+        <span>Lift</span><span style="text-align: right">Start</span><span style="text-align: right">Best set</span>
+      </div>
+      <sc-for list="{{lifts}}" as="l" hint-placeholder-count="5">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 64px 84px; gap: 8px; padding: 10px 0; align-items: center; border-bottom: 1px solid #E6EAF0; font-size: 15px">
+          <span>{{l.name}}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; text-align: right; color: #4A5667">{{l.start}}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; text-align: right">{{l.best}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="background: {{accentSoft}}; border-radius: 20px; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+      <div style="display: flex; flex-direction: column; gap: 2px; flex: 1">
+        <span style="font-weight: 600; font-size: 15px">First weigh-in: Sunday 11 Oct</span>
+        <span style="font-size: 13px; color: #4A5667">Body weight and forearm charts start once you log it.</span>
+      </div>
+      <a href="CheckIn.dc.html" style="height: 44px; padding: 0 14px; border-radius: 12px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; text-decoration: none; font-size: 14px; font-weight: 600">Check in</a>
+    </section>
+  </main>
+
+  <nav aria-label="Main" style="height: 80px; background: #FFFFFF; border-top: 1px solid #D6DCE5; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center">
+    <a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Today</a>
+    <a href="Train.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path></svg></span>Train</a>
+    <a href="Food.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M7 7h4M17 3c-1.7 0-3 2.2-3 5s1.3 4 3 4v9"></path></svg></span>Food</a>
+    <a href="Progress.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #16202C; font-size: 12px; font-weight: 600">
+      <span style="width: 64px; height: 32px; border-radius: 16px; background: {{accentSoft}}; color: {{accent}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></span>Progress</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"accentSoft":{"editor":"color","default":"#E3EBFA"},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const target = 130, h = 104;
+    const vals = [null, 125, 19, null, null, null, null];
+    const bars = vals.map(v => ({
+      v: v == null ? '' : String(v),
+      bar: v == null
+        ? 'display: block; width: 100%; height: 4px; border-radius: 2px; background: #E6EAF0'
+        : 'display: block; width: 100%; border-radius: 6px 6px 2px 2px; height: ' + Math.round(Math.min(v, 160) / target * h) + 'px; background: ' + (v >= target ? '#1D7A4A' : '#7FB89A')
+    }));
+    const lifts = [
+      { name: 'Back squat', start: '40', best: '40 × 8' },
+      { name: 'Romanian deadlift', start: '30', best: '40 × 10' },
+      { name: 'Hip thrust', start: '50', best: '50 × 10' },
+      { name: 'Bench press', start: '30', best: '–' },
+      { name: 'Deadlift', start: '50', best: '–' }
+    ];
+    return { accent: this.props.accent ?? '#2350A8', accentSoft: this.props.accentSoft ?? '#E3EBFA', bars, lifts };
+  }
+}
+</script>
+</body>
+</html>

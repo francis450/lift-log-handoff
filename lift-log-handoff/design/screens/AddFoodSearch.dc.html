@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Add food by search</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #5A6472; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden">
+
+  <a href="Food.dc.html" aria-label="Close and go back to Food" style="height: 80px; display: block; flex-shrink: 0"></a>
+
+  <section role="dialog" aria-label="Add food to Dinner" style="flex: 1; background: #FFFFFF; border-radius: 28px 28px 0 0; padding: 10px 20px 20px; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <span style="align-self: center; width: 36px; height: 4px; border-radius: 2px; background: #B9C2CF"></span>
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700">Add food</h1>
+      <a href="Food.dc.html" aria-label="Close" style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #16202C"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    </div>
+
+    <div role="tablist" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; background: #EEF1F5; border-radius: 14px; padding: 4px">
+      <a href="AddFood.dc.html" role="tab" aria-selected="false" style="height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #4A5667; font-size: 14px; font-weight: 600">Photo</a>
+      <button role="tab" aria-selected="false" style="height: 40px; border-radius: 10px; border: 0; background: transparent; color: #4A5667; font: inherit; font-size: 14px; font-weight: 600">Describe</button>
+      <button role="tab" aria-selected="true" style="height: 40px; border-radius: 10px; border: 0; background: #FFFFFF; color: #16202C; font: inherit; font-size: 14px; font-weight: 600; box-shadow: 0 1px 3px rgba(22,32,44,0.15)">Search</button>
+      <button role="tab" aria-selected="false" style="height: 40px; border-radius: 10px; border: 0; background: transparent; color: #4A5667; font: inherit; font-size: 14px; font-weight: 600">Custom</button>
+    </div>
+
+    <label style="display: flex; align-items: center; gap: 10px; height: 52px; border-radius: 14px; border: 2px solid {{accent}}; padding: 0 14px; box-sizing: border-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A5667" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <span style="position: absolute; left: -9999px">Search foods</span>
+      <input value="ch" style="flex: 1; border: 0; background: transparent; font: inherit; font-size: 16px; color: #16202C; min-width: 0">
+    </label>
+
+    <div style="flex: 1; display: flex; flex-direction: column; border: 1px solid #D6DCE5; border-radius: 16px; overflow: hidden">
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="2">
+        <div style="display: flex; flex-direction: column">
+          <span style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E; background: #F5F7FA; padding: 6px 14px">{{g.label}}</span>
+          <sc-for list="{{g.items}}" as="f" hint-placeholder-count="3">
+            <button onClick="{{f.pick}}" aria-pressed="{{f.on}}" style="{{f.style}}">
+              <span style="display: flex; flex-direction: column; gap: 1px; text-align: left; min-width: 0"><span style="font-size: 15px; font-weight: 500">{{f.n}}</span><span style="font-size: 12px; color: #5F6B7E">{{f.portion}}</span></span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5667; white-space: nowrap">{{f.k}} · {{f.p}}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #F5F7FA; border-radius: 16px; padding: 10px 12px">
+      <span style="display: flex; flex-direction: column; min-width: 0"><span style="font-weight: 600; font-size: 15px">{{pick.n}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5667">{{pickTotal}}</span></span>
+      <span style="display: flex; align-items: center; gap: 8px">
+        <button onClick="{{less}}" aria-label="Fewer portions" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #B9C2CF; background: #FFFFFF; font: inherit; font-size: 20px; color: #16202C">−</button>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 18px; min-width: 32px; text-align: center">{{qty}}</span>
+        <button onClick="{{more}}" aria-label="More portions" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #B9C2CF; background: #FFFFFF; font: inherit; font-size: 20px; color: #16202C">+</button>
+      </span>
+    </div>
+
+    <a href="Food.dc.html" style="height: 52px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-size: 16px">Add to Dinner</a>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: 'Chapati', qty: 2 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#2350A8';
+    const all = {
+      'Chapati': { portion: '1 medium', k: 180, p: 4 },
+      'Chai with milk and sugar': { portion: '1 cup', k: 90, p: 2 },
+      'Chicken stew': { portion: 'fist-size, ~100 g', k: 220, p: 25 },
+      'Chips (fries)': { portion: '1 plate, ~200 g', k: 550, p: 7 }
+    };
+    const row = n => {
+      const on = this.state.sel === n, f = all[n];
+      return { n, portion: f.portion, k: f.k + ' kcal', p: f.p + ' g', on,
+        style: 'display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 56px; padding: 8px 14px; border: 0; border-top: 1px solid #E6EAF0; font: inherit; color: #16202C; cursor: pointer; background: ' + (on ? '#E3EBFA' : '#FFFFFF'),
+        pick: () => this.setState({ sel: n, qty: 1 }) };
+    };
+    const groups = [
+      { label: 'Common foods', items: [row('Chapati'), row('Chai with milk and sugar'), row('Chicken stew'), row('Chips (fries)')] }
+    ];
+    const f = all[this.state.sel], q = this.state.qty;
+    return {
+      accent, groups, qty: q, pick: { n: this.state.sel },
+      pickTotal: (f.k * q) + ' kcal · ' + (f.p * q) + ' g protein',
+      less: () => this.setState({ qty: Math.max(0.5, q - 0.5) }),
+      more: () => this.setState({ qty: q + 0.5 })
+    };
+  }
+}
+</script>
+</body>
+</html>

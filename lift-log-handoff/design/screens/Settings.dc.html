@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <header style="padding: 12px 12px 8px; display: flex; align-items: center; gap: 4px">
+    <a href="Main.dc.html" aria-label="Back to Today" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #16202C; border-radius: 24px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </a>
+    <h1 style="margin: 0; flex: 1; font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700">Settings</h1>
+  </header>
+
+  <main style="flex: 1; padding: 0 20px; display: flex; flex-direction: column; gap: 14px; overflow: hidden">
+    <sc-for list="{{groups}}" as="g" hint-placeholder-count="4">
+      <section style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E; padding: 0 4px">{{g.title}}</span>
+        <div style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 18px; display: flex; flex-direction: column; overflow: hidden">
+          <sc-for list="{{g.rows}}" as="r" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 8px 16px; border-top: 1px solid #E6EAF0; box-sizing: border-box">
+              <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0"><span style="font-size: 15px; font-weight: 500">{{r.label}}</span><sc-if value="{{r.hasSub}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; color: #4A5667">{{r.sub}}</span></sc-if></span>
+              <sc-if value="{{r.isToggle}}" hint-placeholder-val="{{false}}">
+                <button role="switch" aria-checked="{{r.on}}" aria-label="{{r.label}}" onClick="{{r.toggle}}" style="{{r.track}}"><span style="{{r.knob}}"></span></button>
+              </sc-if>
+              <sc-if value="{{r.isValue}}" hint-placeholder-val="{{true}}">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5667; white-space: nowrap">{{r.value}} ›</span>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+  </main>
+
+  <div style="padding: 12px 20px 20px; display: flex; gap: 10px">
+    <button style="flex: 1; height: 48px; border-radius: 14px; border: 1px solid #B9C2CF; background: #FFFFFF; color: #16202C; font: inherit; font-weight: 600; font-size: 14px">Export my data</button>
+    <a href="SignIn.dc.html" style="flex: 1; height: 48px; border-radius: 14px; border: 1px solid #E8B4AE; background: #FFFFFF; color: #A1271E; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-size: 14px">Sign out</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { t: { workout: true, food: true, checkin: true } }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#2350A8';
+    const val = (label, value, sub) => ({ label, value, sub: sub || '', hasSub: !!sub, isValue: true, isToggle: false });
+    const tog = (key, label, sub) => {
+      const on = this.state.t[key];
+      return { label, sub: sub || '', hasSub: !!sub, isValue: false, isToggle: true, on,
+        track: 'position: relative; width: 52px; height: 32px; border-radius: 16px; border: 0; padding: 0; cursor: pointer; flex-shrink: 0; background: ' + (on ? accent : '#C9D0DA'),
+        knob: 'position: absolute; top: 4px; left: ' + (on ? 24 : 4) + 'px; width: 24px; height: 24px; border-radius: 12px; background: #FFFFFF',
+        toggle: () => this.setState({ t: { ...this.state.t, [key]: !on } }) };
+    };
+    const groups = [
+      { title: 'Daily targets', rows: [val('Calories', '2,200 kcal', 'Lower by 150–200 if weight stalls 2 weeks'), val('Protein', '130 g', 'About 1.8 g per kg')] },
+      { title: 'Training', rows: [val('Program', 'Block 2', '5 Oct – 27 Dec'), val('Session time', '6:00 PM'), val('Units', 'kg')] },
+      { title: 'Reminders', rows: [tog('workout', 'Before workout', '30 min before'), tog('food', 'Log dinner', '8:00 PM if dinner is empty'), tog('checkin', 'Sunday check-in', '9:00 AM')] },
+      { title: 'Account', rows: [val('Server', 'Connected', '[your-erpnext-site]'), val('AI features', 'On', 'Photo estimates, suggestions, weekly review')] }
+    ];
+    return { groups };
+  }
+}
+</script>
+</body>
+</html>

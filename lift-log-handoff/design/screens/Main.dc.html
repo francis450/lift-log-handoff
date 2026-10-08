@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Today</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #EEF1F5; color: #16202C; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; position: relative; overflow: hidden">
+
+  <header style="padding: 20px 20px 12px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Wed 7 Oct · Week 1</span>
+      <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 700; line-height: 1">Today</h1>
+    </div>
+    <div style="display: flex; align-items: center; gap: 6px">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 0.03em; background: {{accentSoft}}; color: {{accent}}; padding: 4px 12px; border-radius: 999px">Build phase</span>
+      <a href="Settings.dc.html" aria-label="Settings" style="width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: #16202C">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+      </a>
+    </div>
+  </header>
+
+  <div style="padding: 0 20px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+    <sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+      <div style="{{d.box}}">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #5F6B7E">{{d.dow}}</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600">{{d.num}}</span>
+        <span style="display: flex; gap: 3px"><span style="{{d.train}}"></span><span style="{{d.food}}"></span></span>
+      </div>
+    </sc-for>
+  </div>
+
+  <main style="flex: 1; padding: 16px 20px 0; display: flex; flex-direction: column; gap: 14px; overflow: hidden">
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Tonight · 6:00 PM</span>
+        <span style="font-size: 13px; color: #5F6B7E">~60 min</span>
+      </div>
+      <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; line-height: 1.05">Conditioning + Core</h2>
+      <p style="margin: 0; font-size: 14px; color: #4A5667; line-height: 1.5">8 rounds of 1 min hard / 2 min easy, then plank, side plank, knee raises, cable crunch and the forearm finisher.</p>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <span style="font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 8px; background: #F5F7FA; border: 1px solid #D6DCE5; color: #4A5667">7 exercises</span>
+        <span style="font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 8px; background: #F5F7FA; border: 1px solid #D6DCE5; color: #4A5667">Forearms</span>
+      </div>
+      <a href="Workout.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 52px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13-8z"></path></svg>
+        Start workout
+      </a>
+    </section>
+
+    <a href="Food.dc.html" style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: #16202C">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: #5F6B7E">Food so far</span>
+        <span style="font-size: 13px; color: {{accent}}; font-weight: 600">Log food ›</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 700; line-height: 1">720 <span style="font-size: 15px; color: #5F6B7E">/ 2,200 kcal</span></span>
+          <span style="display: block; height: 8px; border-radius: 4px; background: #E6EAF0; overflow: hidden"><span style="display: block; width: 33%; height: 100%; background: {{accent}}"></span></span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 700; line-height: 1">19 <span style="font-size: 15px; color: #5F6B7E">/ 130 g protein</span></span>
+          <span style="display: block; height: 8px; border-radius: 4px; background: #E6EAF0; overflow: hidden"><span style="display: block; width: 15%; height: 100%; background: #1D7A4A"></span></span>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #8A5A00; background: #FBF0D9; border-radius: 10px; padding: 8px 10px">111 g protein to go. A high-protein lunch keeps you on track for tonight.</p>
+    </a>
+
+    <section style="background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 20px; padding: 14px 18px; display: flex; align-items: center; gap: 14px">
+      <span style="width: 44px; height: 44px; border-radius: 12px; background: {{accentSoft}}; color: {{accent}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"></path><path d="M14 7h7v7"></path></svg>
+      </span>
+      <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+        <span style="font-weight: 600; font-size: 15px">Last session: Lower + Walk</span>
+        <span style="font-size: 13px; color: #4A5667">Squat 40 kg × 8, 7, 7. Hit 8 on every set to move up to 42.5 kg.</span>
+      </div>
+    </section>
+  </main>
+
+  <nav aria-label="Main" style="height: 80px; background: #FFFFFF; border-top: 1px solid #D6DCE5; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center">
+    <a href="Main.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #16202C; font-size: 12px; font-weight: 600">
+      <span style="width: 64px; height: 32px; border-radius: 16px; background: {{accentSoft}}; color: {{accent}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Today</a>
+    <a href="Train.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path></svg></span>Train</a>
+    <a href="Food.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M7 7h4M17 3c-1.7 0-3 2.2-3 5s1.3 4 3 4v9"></path></svg></span>Food</a>
+    <a href="Progress.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A5667; font-size: 12px; font-weight: 500">
+      <span style="width: 64px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></span>Progress</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"accentSoft":{"editor":"color","default":"#E3EBFA"},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#2350A8';
+    const base = 'background: #FFFFFF; border: 1px solid #D6DCE5; border-radius: 12px; padding: 8px 2px; display: flex; flex-direction: column; align-items: center; gap: 2px';
+    const sel = base + '; border-color: ' + accent + '; box-shadow: inset 0 0 0 1px ' + accent;
+    const dot = (on, color) => 'width: 7px; height: 7px; border-radius: 50%; box-sizing: border-box; ' + (on ? 'background: ' + color : 'border: 1.5px solid #B9C2CF');
+    const raw = [
+      ['MON', 5, false, false], ['TUE', 6, true, true], ['WED', 7, false, true],
+      ['THU', 8, false, false], ['FRI', 9, false, false], ['SAT', 10, false, false], ['SUN', 11, false, false]
+    ];
+    const days = raw.map(([dow, num, t, f]) => ({ dow, num, box: num === 7 ? sel : base, train: dot(t, '#1D7A4A'), food: dot(f, accent) }));
+    return { accent, accentSoft: this.props.accentSoft ?? '#E3EBFA', days };
+  }
+}
+</script>
+</body>
+</html>

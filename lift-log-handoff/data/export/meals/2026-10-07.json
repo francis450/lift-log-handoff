@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-07",
+  "items": [
+    {
+      "id": "muxumr03k6d4",
+      "k": 250,
+      "meal": "Breakfast",
+      "n": "Mandazi",
+      "p": 4,
+      "portion": "1",
+      "qty": 2,
+      "src": "list"
+    },
+    {
+      "id": "muxumwk3ncxa",
+      "k": 70,
+      "meal": "Breakfast",
+      "n": "Boiled egg",
+      "p": 6,
+      "portion": "1 egg",
+      "qty": 1,
+      "src": "list"
+    },
+    {
+      "id": "muxup5ke0s2q",
+      "k": 150,
+      "meal": "Breakfast",
+      "n": "Beef Samosa",
+      "p": 5,
+      "portion": "1 samosa (~50g)",
+      "qty": 1,
+      "src": "custom"
+    }
+  ],
+  "savedAt": "2026-10-07T08:33:46.094Z"
+}

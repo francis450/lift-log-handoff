@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lift Log: Sign in</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2350A8}a:hover{color:#1A3D82}
+</style>
+</helmet>
+<div style="width: 412px; height: 915px; box-sizing: border-box; background: #16202C; color: #FFFFFF; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+  <section style="flex: 1; padding: 72px 28px 24px; display: flex; flex-direction: column; gap: 18px">
+    <span style="width: 64px; height: 64px; border-radius: 18px; background: {{accent}}; display: flex; align-items: center; justify-content: center">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"></path></svg>
+    </span>
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 700; line-height: 0.95">Lift Log</h1>
+    <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #C9D2DE; max-width: 300px">Log every set and every meal. Know when to add weight. Review the week with Claude.</p>
+  </section>
+
+  <form style="background: #FFFFFF; color: #16202C; border-radius: 28px 28px 0 0; padding: 24px 24px 28px; display: flex; flex-direction: column; gap: 14px">
+    <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700">Sign in to your server</h2>
+    <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5667">Server address
+      <input value="https://" inputmode="url" style="height: 52px; border-radius: 14px; border: 1px solid #B9C2CF; padding: 0 14px; font: inherit; font-size: 16px; color: #16202C; box-sizing: border-box; width: 100%">
+    </label>
+    <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5667">Email or username
+      <input inputmode="email" style="height: 52px; border-radius: 14px; border: 1px solid #B9C2CF; padding: 0 14px; font: inherit; font-size: 16px; color: #16202C; box-sizing: border-box; width: 100%">
+    </label>
+    <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5667">Password
+      <input type="password" style="height: 52px; border-radius: 14px; border: 1px solid #B9C2CF; padding: 0 14px; font: inherit; font-size: 16px; color: #16202C; box-sizing: border-box; width: 100%">
+    </label>
+    <span style="font-size: 12px; color: #4A5667; line-height: 1.45">Your ERPNext login. Your data stays on that site, in the Lift Log app.</span>
+    <a href="Setup.dc.html" style="height: 52px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 600; font-size: 16px">Sign in</a>
+  </form>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2350A8","options":["#2350A8","#1D6B5F","#B4462B","#5B3FA8"]},"$preview":{"width":412,"height":915}}'>
+class Component extends DCLogic {
+  renderVals() { return { accent: this.props.accent ?? '#2350A8' }; }
+}
+</script>
+</body>
+</html>
