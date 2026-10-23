@@ -38,6 +38,9 @@ Model: `model_quick`. The server builds the context itself:
 - the day's routine name and session time, or "rest day"
 - the user's 15 most frequent foods in the last 30 days (fallback: chapati, rice, beef stew, chicken, lentils, beans, eggs)
 - goal and body weight
+- the meal's budget: its share of what's left, so lunch leaves room for dinner
+
+Meal budget. Each main meal's share of the day is breakfast 25, lunch 35, dinner 40. The meal asked for, plus the main meals after it that have nothing logged yet, split what's left in proportion to their shares. Earlier meals that were skipped don't count, and the last meal still to come gets everything left. Snacks get 10% of the day's targets (capped at what's left) while dinner is still to come, and everything left after it. Example: 1,102 kcal and 105 g left after breakfast gives lunch about 514 kcal and 49 g, leaving 588 kcal and 56 g for dinner.
 
 Prompt:
 ```
@@ -47,14 +50,18 @@ using cheap, easy-to-find Kenyan foods and home cooking.
 Targets today: {kcal} kcal and {protein} g protein. Remaining: {kcal_left} kcal and
 {protein_left} g protein. Eaten so far: {eaten}. Training today: {training}.
 Foods he often eats: {usual}.
-Close the protein gap without going over the remaining calories. If calories are nearly
-used up, suggest lean, high-protein, low-calorie options. Keep portions realistic.
+Budget for his {meal}: about {meal_kcal} kcal and {meal_protein} g protein. Keep each option
+close to that budget and never more than 10% over it. The rest ({later_kcal} kcal,
+{later_protein} g protein) is for {later meals}, so don't use it up.
+   (when no meal comes after: "Close the protein gap without going over the remaining calories.")
+If calories are nearly used up, suggest lean, high-protein, low-calorie options. Keep portions realistic.
 Each option lists its foods with portion, kcal and grams of protein for that portion, and
 one short sentence on why it fits.
-Reply with only a JSON array:
-[{"title":"...","why":"...","items":[{"food_name":"...","portion":"...","kcal":0,"protein_g":0}]}]
+He has already seen these, so suggest different meals: {exclude}.   (only for "More ideas")
+Reply with only a JSON object:
+{"options":[{"title":"...","why":"...","items":[{"food_name":"...","portion":"...","kcal":0,"protein_g":0}]}]}
 ```
-Keep at most 4 options, each with at least one valid item.
+Keep at most 4 options, each with at least one valid item. Drop options over 120% of the meal budget, unless every option is over (then keep them, so there's still an answer).
 
 ## 3. Weekly review (`ai.weekly_review`)
 
@@ -120,5 +127,5 @@ Sends the same DATA, the stored review, and the user's question (≤ 500 charact
 
 - Daily limit per user (default 40 calls) across all features.
 - Photos capped at `max_image_mb` after resizing.
-- The suggestion card is fetched at most once per 3 hours automatically (docs/01); "Other ideas" is manual.
+- The suggestion card is fetched at most once per 3 hours automatically (docs/01); "More ideas" is manual.
 - `LL AI Log` gives a monthly token total per feature; add a simple desk report "AI usage by month".

@@ -115,10 +115,12 @@ Either or both of text and image. Returns:
 ```
 
 ### `ai.suggest` (POST)
-`{ "date": "2026-10-07", "meal": "lunch" }`. The server reads the day's entries, targets, recent foods and the day's routine itself. Returns:
+`{ "date": "2026-10-07", "meal": "lunch", "exclude": "[\"Bean stew\"]" }`. The server reads the day's entries, targets, recent foods and the day's routine itself. `exclude` (optional, a JSON list of titles already shown, last 12 kept) is sent by "More ideas" so the new options differ. Returns:
 ```json
-{ "options": [ { "title": "Chicken stew, rice and ndengu", "why": "...", "items": [ { "food_name", "portion", "kcal", "protein_g" } ] } ] }
+{ "options": [ { "title": "Chicken stew, rice and ndengu", "why": "...", "items": [ { "food_name", "portion", "kcal", "protein_g" } ] } ],
+  "budget": { "kcal": 514, "protein_g": 49 } }
 ```
+`budget` is this meal's share of what's left (docs/05).
 
 ### `ai.weekly_review` (POST)
 `{ "week": 1, "regenerate": false }`. Returns the LL Weekly Review (existing one unless `regenerate`).

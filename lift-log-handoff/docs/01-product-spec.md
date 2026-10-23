@@ -46,7 +46,7 @@ The weekly review design shows example numbers. Real content comes from the revi
 
 ## Logging a workout
 
-1. Start workout opens the day's routine at the first exercise. A session record is created with `status = in_progress` and `started_at`.
+1. Opening a training day (from Today, Train or History) shows a preview: each exercise with its target and add-weight call, no timer, and nothing saved. **Start workout** opens the routine at the first exercise and creates the session record with `status = in_progress` and `started_at` = now. A session that was opened but has nothing logged counts as not started: it shows Start (not Resume), opens as a preview, and Start resets its `started_at`.
 2. Each exercise shows: name, target (`3 × 6–8 reps`), a Form button (opens the exercise's `form_url`), the add-weight call (below), and one row per target set.
 3. Weight fields are prefilled with the suggested weight. Reps fields are empty, with last session's reps as placeholder text.
 4. Ticking a set marks it done. A row of three effort buttons appears under it: **Easy** (3+ more reps were possible), **Right** (1–2 left), **Hard** (nothing left or missed reps). Effort is optional.
@@ -91,7 +91,7 @@ A weekday routine whose date has passed with no session is shown as Missed on Tr
 ### Food day
 
 - Two meters: calories eaten vs target, protein vs target, with "X of Y left". The calorie meter turns amber when over target; the protein meter stays green.
-- A suggestion card ("Suggested lunch") from the suggestion endpoint, requested when the Food tab opens if the day has ≥ 300 kcal left and no suggestion was fetched in the last 3 hours. "Other ideas" asks again. "Add to {meal}" logs its foods.
+- A suggestion card ("Suggested lunch") from the suggestion endpoint, requested when the Food tab opens if the day has ≥ 300 kcal left and no suggestion was fetched in the last 3 hours. Each option is sized to that meal's share of what's left, so the meals still to come keep theirs (docs/05). The options sit side by side: swipe to compare, with an "N of M" counter and page dots. Each shows "Leaves {kcal} kcal · {g} g protein for later". The last page is "More ideas", which adds new options after the ones shown (up to 12) rather than replacing them. "Add to {meal}" logs its foods.
 - Meals: Breakfast, Lunch, Dinner, Snacks, each with entries (name, quantity × portion, kcal, protein) and a per-meal total. Long-press an entry to edit quantity or delete.
 - Add food button (extended FAB with camera icon) opens the Add food sheet with the meal preset by time of day: before 11:00 Breakfast, before 16:00 Lunch, before 21:00 Dinner, else Snacks.
 - Previous / next day arrows.
