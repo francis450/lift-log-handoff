@@ -22,7 +22,7 @@ Rotates the secret so the stored token stops working. Returns `{ "ok": true }`.
 ## Profile
 
 ### `profile.get` (GET)
-Returns LL Profile fields plus `program` (the active program's `definition` JSON).
+Returns LL Profile fields plus `program` (the active program's `definition` JSON) and `exercises`, the library keyed by name: `{ "type", "equipment", "increment_kg", "pair", "form_url" }`.
 
 ### `profile.save` (POST)
 Body: any LL Profile fields. Sending `kcal_target` or `protein_target_g` sets that target's `_manual` flag; sending `{"kcal_target_manual": 0}` switches it back to automatic. The server recalculates automatic targets (docs/03) and returns the saved profile, including `targets_note` when the targets just changed. The app shows the note once, then calls `profile.save` with `{"targets_note": ""}`.
@@ -53,13 +53,18 @@ Returns the LL Workout Session for the date or `null`.
   "session_date": "2026-10-06", "week": 1, "routine_key": "lower", "routine_name": "Lower + Walk",
   "status": "done", "started_at": "2026-10-06T15:02:00Z", "finished_at": "2026-10-06T15:54:00Z",
   "note": "…", "client_updated_at": "2026-10-06T15:54:10Z",
-  "sets": [ { "exercise": "Barbell back squat", "set_no": 1, "kg": 40, "amount": 8, "effort": "easy", "done": true } ]
+  "sets": [ { "exercise": "Barbell back squat", "set_no": 1, "kg": 40, "amount": 8, "effort": "easy", "done": true },
+            { "exercise": "Side plank", "set_no": 1, "side": "L", "kg": null, "amount": 38, "effort": "right", "done": true },
+            { "exercise": "Side plank", "set_no": 1, "side": "R", "kg": null, "amount": 35, "effort": "hard", "done": true } ]
 }
 ```
-Upsert by `(user, session_date)`. Returns the stored session. If the stored `client_updated_at` is newer, returns HTTP 409 with `{ "stored": <session> }`.
+Upsert by `(user, session_date)`. Returns the stored session. If the stored `client_updated_at` is newer, returns HTTP 409 with `{ "stored": <session> }`. `side` (`L`, `R` or absent) marks per-side sets; returned sets always carry `side` (`null` when blank).
+
+### `sessions.delete` (POST)
+`{ "session_date": "2026-10-14", "client_updated_at": "2026-10-14T16:00:00Z" }`. Cancel workout: deletes the user's session for that date. Returns `{ "deleted": true }`, or `{ "deleted": false }` when there is none, so a retry succeeds. If the stored `client_updated_at` is newer, returns HTTP 409 with `{ "stored": <session> }` and keeps it. Offline, the app queues the delete in the day's session slot, so it replaces any save still waiting.
 
 ### `sessions.history` (GET) `?exercise=Barbell back squat&limit=6`
-The last N sessions containing that exercise, newest first, each with only that exercise's sets. Feeds the add-weight rule when the local cache is empty.
+The last N sessions containing that exercise, newest first, each with only that exercise's sets (including `set_no` and `side`). Feeds the add-weight rule when the local cache is empty.
 
 ### `sessions.month` (GET) `?month=2026-10`
 `[ { "date": "2026-10-06", "routine_name": "Lower + Walk", "sets": 12, "status": "done" } ]` for the History calendar.
@@ -115,10 +120,12 @@ Either or both of text and image. Returns:
 ```
 
 ### `ai.suggest` (POST)
-`{ "date": "2026-10-07", "meal": "lunch" }`. The server reads the day's entries, targets, recent foods and the day's routine itself. Returns:
+`{ "date": "2026-10-07", "meal": "lunch", "exclude": "[\"Bean stew\"]" }`. The server reads the day's entries, targets, recent foods and the day's routine itself. `exclude` (optional, a JSON list of titles already shown, last 12 kept) is sent by "More ideas" so the new options differ. Returns:
 ```json
-{ "options": [ { "title": "Chicken stew, rice and ndengu", "why": "...", "items": [ { "food_name", "portion", "kcal", "protein_g" } ] } ] }
+{ "options": [ { "title": "Chicken stew, rice and ndengu", "why": "...", "items": [ { "food_name", "portion", "kcal", "protein_g" } ] } ],
+  "budget": { "kcal": 514, "protein_g": 49 } }
 ```
+`budget` is this meal's share of what's left (docs/05).
 
 ### `ai.weekly_review` (POST)
 `{ "week": 1, "regenerate": false }`. Returns the LL Weekly Review (existing one unless `regenerate`).

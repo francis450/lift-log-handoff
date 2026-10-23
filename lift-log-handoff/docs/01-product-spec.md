@@ -46,35 +46,48 @@ The weekly review design shows example numbers. Real content comes from the revi
 
 ## Logging a workout
 
-1. Start workout opens the day's routine at the first exercise. A session record is created with `status = in_progress` and `started_at`.
+1. Opening a training day (from Today, Train or History) shows a preview: each exercise with its target and add-weight call, no timer, and nothing saved. **Start workout** opens the routine at the first exercise and creates the session record with `status = in_progress` and `started_at` = now. A session that was opened but has nothing logged counts as not started: it shows Start (not Resume), opens as a preview, and Start resets its `started_at`.
 2. Each exercise shows: name, target (`3 × 6–8 reps`), a Form button (opens the exercise's `form_url`), the add-weight call (below), and one row per target set.
-3. Weight fields are prefilled with the suggested weight. Reps fields are empty, with last session's reps as placeholder text.
+3. Weight fields are prefilled with the suggested weight. Reps fields are empty, with last session's reps for the same set (and side) as placeholder text.
 4. Ticking a set marks it done. A row of three effort buttons appears under it: **Easy** (3+ more reps were possible), **Right** (1–2 left), **Hard** (nothing left or missed reps). Effort is optional.
 5. Ticking a set starts the rest timer (default 90 s; 2 min for exercises flagged `main`). The timer offers +30 s and Skip, and vibrates at zero.
-6. "+ Add set" adds a row. Rows with no reps entered are not saved.
+6. "+ Add set" adds a row (an L and R pair for per-side exercises). Rows with no reps entered are not saved.
 7. Next exercise moves on; the progress bar shows exercise N of M. A note can be added at any point.
 8. Finishing saves `status = done`, `finished_at`, and opens the summary.
 9. Everything saves locally as it is entered. Killing the app mid-workout resumes where it left off.
+10. **Workout clock.** The elapsed time in the header opens a sheet, for a workout started by mistake: **Start time** (a time picker on the day it started; not later than now), **Restart clock** (start = now), and **Cancel workout**. Cancel asks first ("The N sets you logged will be deleted. This can't be undone.") and removes the session from the phone and the server (`sessions.delete`, queued offline like any write). A session saved earlier but never started (opened before the preview existed) shows **Cancel workout** next to Start in the preview.
+
+### Per-side exercises
+
+Routine items with the note "per side" (side plank, one-arm dumbbell row, radial deviation) log each set as two rows, **1L** and **1R**, each with its own weight, reps or seconds, and effort, because the two sides rarely match. Both rows carry the same `set_no` and a `side` of `L` or `R`. Sessions logged before this have plain rows and stay plain when edited. The add-weight rule judges a per-side set on the weaker side (see below).
+
+### Dumbbell weights
+
+Dumbbell weights are logged **per dumbbell**, the number printed on it, so the weights match the rack (2.5, 5, 7.5 ...). Exercises that use two dumbbells at once (`pair` in the exercise library) label the weight column "kg each" and count it twice in total lifted. One-arm exercises are plain "kg".
 
 ### Workout summary
 
-Duration, sets logged, total kg lifted (sum of kg × reps over load exercises), the effort split as a bar (easy / right / hard counts), a one-line read of the effort ("Most sets felt easy. There's room to go heavier."), a "Next time" call per exercise (the add-weight rule applied to this session), and the note.
+Duration, sets logged (a per-side set counts as two), total kg lifted (sum of kg × reps over load exercises, × 2 for a pair of dumbbells), the effort split as a bar (easy / right / hard counts), a one-line read of the effort ("Most sets felt easy. There's room to go heavier."), a "Next time" call per exercise (the add-weight rule applied to this session), and the note. **Edit times** opens Started and Finished time pickers on the session's day (finish must be after start) to fix a session recorded with the wrong times.
 
 ### Add-weight rule
 
 One pure function, `nextCall(exercise, target, history) -> { call: 'up' | 'hold' | 'down' | 'start' | 'test' | 'bodyweight', kg?: number, reason: string }`. Unit-test every branch.
 
-Definitions: `S` = target sets, `[a, b]` = rep range (single value means `a = b`), `inc` = the exercise's `increment_kg`, `L` = the most recent session containing this exercise, `W` = heaviest kg in `L`, *work sets* = sets in `L` at `W`.
+Definitions: `S` = target sets, `[a, b]` = rep range (single value means `a = b`), `inc` = the exercise's `increment_kg` (the equipment's step: dumbbells 2.5 kg each, barbell 2.5, the cable stack 5), `L` = the most recent session containing this exercise, `W` = heaviest kg in `L`, *work sets* = sets in `L` at `W`. *Step up* = the smallest multiple of `inc` above `W`; *step down* = the largest multiple of `inc` below `W` (not below 0). So a weight off the step (24 kg on a 5 kg stack) moves to a weight the equipment has (25 up, 20 down). A *big step* is `inc` more than 10% of `W` (dumbbells 5 to 7.5 kg is +50%).
+
+Per-side sets (an L and an R with the same `set_no`) count as one set judged on the weaker side: the lower kg, the lower reps or seconds, and the harder effort.
 
 1. Exercise in a test routine: `test`, "Work up past {best} kg if it moves well".
 2. Exercise type `bodyweight` or `time`, or target `max`: `bodyweight`, "Beat last time" plus last session's numbers.
 3. No history: `start` with the program's `starting_weights_kg` value if present ("Start around 30 kg"), else "Pick a weight you can do with clean form".
-4. Work sets count ≥ `S` and every work set's reps ≥ `b`: `up`, `W + inc`, "Hit the top of the range".
-5. Early bump from effort. In each of the last two sessions with this exercise at weight `W`: every work set's reps ≥ `a`, at least two thirds of work sets rated Easy, none rated Hard. Then `up`, `W + inc`, "Felt easy two sessions running".
-6. Struggling. In each of the last two sessions at `W`: at least half the work sets rated Hard and at least half below `a` reps. Then `down`, `W - inc` (not below 0), "Two hard sessions: drop a step and rebuild".
+4. Work sets count ≥ `S` and every work set's reps ≥ `b`: `up`, step up, "Hit the top of the range".
+5. Early bump from effort, not on a big step (there, stay and build reps to the top of the range). In each of the last two sessions with this exercise at weight `W`: every work set's reps ≥ `a`, at least two thirds of work sets rated Easy, none rated Hard. Then `up`, step up, "Felt easy two sessions running".
+6. Struggling. In each of the last two sessions at `W`: at least half the work sets rated Hard and at least half below `a` reps. Then `down`, step down, "Two hard sessions: drop a step and rebuild".
 7. Otherwise `hold`, `W`, "Beat your reps".
 
-`distance` exercises (farmers carry) use metres as reps with the same rule. Deload-week sessions are ignored as history for gym exercises. After a phase change the current week's rep targets apply.
+An accepted weekly-review weight change is added to the call's kg and rounded to the nearest step. `distance` exercises (farmers carry) use metres as reps with the same rule. Deload-week sessions are ignored as history for gym exercises. After a phase change the current week's rep targets apply.
+
+The exercise card's legend says "Two easy sessions in a row moves the weight up early." except on a big step, where it says "The next weight is a big jump, so reach the top of the range on every set first."
 
 Display: up = green chip, hold = amber chip, start = blue chip, down = amber chip with the reason.
 
@@ -91,7 +104,7 @@ A weekday routine whose date has passed with no session is shown as Missed on Tr
 ### Food day
 
 - Two meters: calories eaten vs target, protein vs target, with "X of Y left". The calorie meter turns amber when over target; the protein meter stays green.
-- A suggestion card ("Suggested lunch") from the suggestion endpoint, requested when the Food tab opens if the day has ≥ 300 kcal left and no suggestion was fetched in the last 3 hours. "Other ideas" asks again. "Add to {meal}" logs its foods.
+- A suggestion card ("Suggested lunch") from the suggestion endpoint, requested when the Food tab opens if the day has ≥ 300 kcal left and no suggestion was fetched in the last 3 hours. Each option is sized to that meal's share of what's left, so the meals still to come keep theirs (docs/05). The options sit side by side: swipe to compare, with an "N of M" counter and page dots. Each shows "Leaves {kcal} kcal · {g} g protein for later". The last page is "More ideas", which adds new options after the ones shown (up to 12) rather than replacing them. "Add to {meal}" logs its foods.
 - Meals: Breakfast, Lunch, Dinner, Snacks, each with entries (name, quantity × portion, kcal, protein) and a per-meal total. Long-press an entry to edit quantity or delete.
 - Add food button (extended FAB with camera icon) opens the Add food sheet with the meal preset by time of day: before 11:00 Breakfast, before 16:00 Lunch, before 21:00 Dinner, else Snacks.
 - Previous / next day arrows.
