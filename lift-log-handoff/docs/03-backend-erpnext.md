@@ -69,7 +69,9 @@ Naming: `LL` prefix. `user` fields are Link to User, default `frappe.session.use
 |---|---|---|
 | exercise_name | Data | unique, matches program JSON |
 | exercise_type | Select | load / bodyweight / time / distance |
-| increment_kg | Float | |
+| equipment | Select | blank / barbell / dumbbell / cable / machine / bodyweight |
+| increment_kg | Float | the equipment's weight step; suggested weights are multiples of it (dumbbells 2.5, barbell 2.5, cable stack 5) |
+| pair | Check | two dumbbells at once: kg is per dumbbell and counts twice in total lifted |
 | form_url | Data | |
 
 ### LL Workout Session (one per user per date)
@@ -91,8 +93,9 @@ Naming: `LL` prefix. `user` fields are Link to User, default `frappe.session.use
 | Field | Type | Notes |
 |---|---|---|
 | exercise | Link LL Exercise | |
-| set_no | Int | 1-based within exercise |
-| kg | Float | blank for bodyweight/time |
+| set_no | Int | 1-based within exercise; an L and R row of a per-side set share it |
+| side | Select | blank / L / R, for per-side exercises |
+| kg | Float | blank for bodyweight/time; per dumbbell for dumbbell exercises |
 | amount | Float | reps, seconds or metres per exercise type |
 | effort | Select | blank / easy / right / hard |
 | done | Check | |
